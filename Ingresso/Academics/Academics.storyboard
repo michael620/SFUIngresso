@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--CourSys-->
+        <scene sceneID="Oyn-VN-eVd">
+            <objects>
+                <viewController id="2qd-Dl-kvO" customClass="CoursysViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="DR7-mi-inc"/>
+                        <viewControllerLayoutGuide type="bottom" id="MAV-bB-Lk9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EGU-LH-zRx">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBa-tb-Gtb">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="XsJ-XL-Vfr"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="CourSys" id="eiP-B9-z6v">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="HOK-fn-eAl">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="goBack:" destination="2qd-Dl-kvO" id="ZqM-rG-0nc"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOU-Ob-Bgx">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="eOU-Ob-Bgx" firstAttribute="trailing" secondItem="EGU-LH-zRx" secondAttribute="trailing" id="H10-lp-zrw"/>
+                            <constraint firstItem="eOU-Ob-Bgx" firstAttribute="leading" secondItem="EGU-LH-zRx" secondAttribute="leading" id="KDD-UR-x1C"/>
+                            <constraint firstItem="SBa-tb-Gtb" firstAttribute="leading" secondItem="EGU-LH-zRx" secondAttribute="leading" id="Lsm-OX-t3r"/>
+                            <constraint firstItem="SBa-tb-Gtb" firstAttribute="top" secondItem="DR7-mi-inc" secondAttribute="bottom" id="RoL-fx-EY9"/>
+                            <constraint firstItem="MAV-bB-Lk9" firstAttribute="top" secondItem="eOU-Ob-Bgx" secondAttribute="bottom" id="guO-9r-Bue"/>
+                            <constraint firstItem="SBa-tb-Gtb" firstAttribute="trailing" secondItem="EGU-LH-zRx" secondAttribute="trailing" id="h9n-zu-ku3"/>
+                            <constraint firstItem="eOU-Ob-Bgx" firstAttribute="top" secondItem="SBa-tb-Gtb" secondAttribute="bottom" id="lpu-uD-gfD"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="CourSys" image="courSys" id="lGd-1D-V2I"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="CoursysWebView" destination="eOU-Ob-Bgx" id="bNH-dx-J6f"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Rp-e4-951" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="208.5" y="410.5"/>
+        </scene>
+        <!--Beedie-->
+        <scene sceneID="Lmt-oO-7aq">
+            <objects>
+                <viewController id="CIA-Gm-PnC" customClass="BeedieViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JJQ-no-ssW"/>
+                        <viewControllerLayoutGuide type="bottom" id="yuP-AA-2Ir"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="nG4-uH-J53">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YUf-kq-b2L">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="t7b-Gz-bi3"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Beedie" id="bMJ-LV-YJX">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="yHB-KE-kyo">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="goBack:" destination="CIA-Gm-PnC" id="9kW-Ia-cv7"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GY4-LC-ivg">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="GY4-LC-ivg" firstAttribute="top" secondItem="YUf-kq-b2L" secondAttribute="bottom" id="26G-TI-fja"/>
+                            <constraint firstItem="yuP-AA-2Ir" firstAttribute="top" secondItem="GY4-LC-ivg" secondAttribute="bottom" id="7XD-eg-DGr"/>
+                            <constraint firstItem="GY4-LC-ivg" firstAttribute="leading" secondItem="nG4-uH-J53" secondAttribute="leading" id="8Fe-Bt-bZc"/>
+                            <constraint firstItem="YUf-kq-b2L" firstAttribute="leading" secondItem="nG4-uH-J53" secondAttribute="leading" id="GRz-NF-61d"/>
+                            <constraint firstItem="YUf-kq-b2L" firstAttribute="trailing" secondItem="nG4-uH-J53" secondAttribute="trailing" id="Sfg-vN-Pue"/>
+                            <constraint firstItem="GY4-LC-ivg" firstAttribute="trailing" secondItem="nG4-uH-J53" secondAttribute="trailing" id="WzE-Ki-sim"/>
+                            <constraint firstItem="YUf-kq-b2L" firstAttribute="top" secondItem="JJQ-no-ssW" secondAttribute="bottom" id="yiI-B3-XeT"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Beedie" image="beedie" id="RnU-cK-jfo"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="BeedieWebView" destination="GY4-LC-ivg" id="s5x-2c-1xY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kmS-w8-Yo2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="209" y="1161"/>
+        </scene>
+        <!--Canvas-->
+        <scene sceneID="TeV-nx-Fm8">
+            <objects>
+                <viewController id="G4e-fu-5WN" customClass="CanvasViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="wwB-JJ-yQ1"/>
+                        <viewControllerLayoutGuide type="bottom" id="WMa-6m-cHV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="W0T-sz-fK7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rxJ-mt-Flu">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="bFg-oj-cfu"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Canvas" id="xXI-h2-KAy">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="LIB-Uj-Jc6">
+                                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="goBack:" destination="G4e-fu-5WN" id="LUE-kf-syc"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3yU-pf-udK">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="WMa-6m-cHV" firstAttribute="top" secondItem="3yU-pf-udK" secondAttribute="bottom" id="MPt-Fd-Lnq"/>
+                            <constraint firstItem="3yU-pf-udK" firstAttribute="top" secondItem="rxJ-mt-Flu" secondAttribute="bottom" id="THI-T7-3qw"/>
+                            <constraint firstItem="3yU-pf-udK" firstAttribute="leading" secondItem="W0T-sz-fK7" secondAttribute="leading" id="bdF-TJ-UXI"/>
+                            <constraint firstItem="3yU-pf-udK" firstAttribute="trailing" secondItem="W0T-sz-fK7" secondAttribute="trailing" id="iiJ-Ul-yF0"/>
+                            <constraint firstItem="rxJ-mt-Flu" firstAttribute="top" secondItem="wwB-JJ-yQ1" secondAttribute="bottom" id="lgG-0w-5Jj"/>
+                            <constraint firstItem="rxJ-mt-Flu" firstAttribute="trailing" secondItem="W0T-sz-fK7" secondAttribute="trailing" id="nHT-px-KuG"/>
+                            <constraint firstItem="rxJ-mt-Flu" firstAttribute="leading" secondItem="W0T-sz-fK7" secondAttribute="leading" id="vDT-3v-ysp"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Canvas" image="canvas" id="9nZ-ll-vdd"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="CanvasWebView" destination="3yU-pf-udK" id="VvY-pK-JSe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ii5-cn-YaS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="209" y="-319"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="dkI-9g-5aF">
+            <objects>
+                <tabBarController storyboardIdentifier="AcademicsStoryboard" id="KCb-sQ-sUc" sceneMemberID="viewController">
+                    <nil key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="7lx-Bq-uYM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="G4e-fu-5WN" kind="relationship" relationship="viewControllers" id="VKR-Qz-rm0"/>
+                        <segue destination="2qd-Dl-kvO" kind="relationship" relationship="viewControllers" id="cg4-5q-ri0"/>
+                        <segue destination="CIA-Gm-PnC" kind="relationship" relationship="viewControllers" id="7hH-1B-UeF"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WL4-A2-U8B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-611" y="12"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="beedie" width="30" height="26"/>
+        <image name="canvas" width="30" height="31"/>
+        <image name="courSys" width="31" height="26"/>
+    </resources>
+</document>

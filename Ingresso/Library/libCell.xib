@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="libCell" selectionStyle="default" indentationWidth="10" rowHeight="224" id="eLs-th-4Ib" customClass="libCell">
+            <rect key="frame" x="0.0" y="0.0" width="310" height="224"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eLs-th-4Ib" id="rV0-Ew-os9">
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1hA-zr-X7Y">
+                        <rect key="frame" x="13" y="97" width="2" height="31"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" button="YES" notEnabled="YES"/>
+                        </accessibility>
+                        <color key="onTintColor" red="0.65098039220000004" green="0.098039215690000001" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                    </switch>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9fJ-O0-uWe">
+                        <rect key="frame" x="80" y="0.0" width="230" height="119"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                        </accessibility>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vg0-1X-5hw">
+                        <rect key="frame" x="67" y="125" width="230" height="34"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                        </accessibility>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="4ab-62-hAx"/>
+                            <constraint firstAttribute="height" constant="24" id="HL9-eL-GHr"/>
+                        </constraints>
+                        <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="4ab-62-hAx"/>
+                                <exclude reference="HL9-eL-GHr"/>
+                            </mask>
+                        </variation>
+                    </textView>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7d-Ns-iJb">
+                        <rect key="frame" x="67" y="167" width="230" height="44"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <accessibility key="accessibilityConfiguration">
+                            <accessibilityTraits key="traits" none="YES" notEnabled="YES"/>
+                        </accessibility>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="60" id="1K4-wG-Q3f"/>
+                            <constraint firstAttribute="height" constant="60" id="NZs-dE-tjp"/>
+                        </constraints>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="NZs-dE-tjp"/>
+                            </mask>
+                        </variation>
+                    </textView>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailingMargin" secondItem="I7d-Ns-iJb" secondAttribute="trailing" constant="5" id="5F1-rU-nrX"/>
+                    <constraint firstAttribute="centerY" secondItem="1hA-zr-X7Y" secondAttribute="centerY" id="AMd-5H-7Ft"/>
+                    <constraint firstItem="I7d-Ns-iJb" firstAttribute="top" secondItem="9fJ-O0-uWe" secondAttribute="bottom" constant="21" id="FGD-32-tNZ"/>
+                    <constraint firstItem="I7d-Ns-iJb" firstAttribute="leading" secondItem="1hA-zr-X7Y" secondAttribute="trailing" constant="10" id="FJU-3p-l72"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="I7d-Ns-iJb" secondAttribute="bottom" constant="5" id="HFP-kd-F5x"/>
+                    <constraint firstItem="vg0-1X-5hw" firstAttribute="leading" secondItem="1hA-zr-X7Y" secondAttribute="trailing" constant="10" id="JP3-zN-ytK"/>
+                    <constraint firstItem="I7d-Ns-iJb" firstAttribute="top" secondItem="vg0-1X-5hw" secondAttribute="bottom" id="N3y-2V-yrg"/>
+                    <constraint firstItem="9fJ-O0-uWe" firstAttribute="top" secondItem="rV0-Ew-os9" secondAttribute="top" id="Qmz-yo-LPj"/>
+                    <constraint firstAttribute="trailing" secondItem="9fJ-O0-uWe" secondAttribute="trailing" id="awI-Rs-SRI"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="I7d-Ns-iJb" secondAttribute="trailing" constant="5" id="biQ-tQ-tZ3"/>
+                    <constraint firstAttribute="trailing" secondItem="I7d-Ns-iJb" secondAttribute="trailing" id="czC-t4-pvS"/>
+                    <constraint firstAttribute="bottom" secondItem="I7d-Ns-iJb" secondAttribute="bottom" id="fap-tm-aEM"/>
+                    <constraint firstItem="vg0-1X-5hw" firstAttribute="top" secondItem="9fJ-O0-uWe" secondAttribute="bottom" id="jkC-g9-swM"/>
+                    <constraint firstAttribute="trailing" secondItem="vg0-1X-5hw" secondAttribute="trailing" id="n1z-hY-Vuh"/>
+                    <constraint firstItem="I7d-Ns-iJb" firstAttribute="top" secondItem="vg0-1X-5hw" secondAttribute="bottom" constant="5" id="q9X-l7-G70"/>
+                    <constraint firstItem="9fJ-O0-uWe" firstAttribute="leading" secondItem="1hA-zr-X7Y" secondAttribute="trailing" constant="10" id="qPH-t7-3aK"/>
+                    <constraint firstItem="I7d-Ns-iJb" firstAttribute="leading" secondItem="1hA-zr-X7Y" secondAttribute="trailing" constant="5" id="v4e-2a-DsO"/>
+                    <constraint firstItem="1hA-zr-X7Y" firstAttribute="leading" secondItem="rV0-Ew-os9" secondAttribute="leadingMargin" constant="5" id="x9K-Cy-aaM"/>
+                    <constraint firstItem="I7d-Ns-iJb" firstAttribute="top" secondItem="rV0-Ew-os9" secondAttribute="topMargin" constant="5" id="xXz-Xe-LKy"/>
+                </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="5F1-rU-nrX"/>
+                        <exclude reference="FGD-32-tNZ"/>
+                        <exclude reference="HFP-kd-F5x"/>
+                        <exclude reference="biQ-tQ-tZ3"/>
+                        <exclude reference="q9X-l7-G70"/>
+                        <exclude reference="v4e-2a-DsO"/>
+                        <exclude reference="xXz-Xe-LKy"/>
+                    </mask>
+                </variation>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="bookName" destination="9fJ-O0-uWe" id="k99-78-adI"/>
+                <outlet property="dueDateTextView" destination="I7d-Ns-iJb" id="nwQ-v4-Igx"/>
+                <outlet property="pick" destination="1hA-zr-X7Y" id="RoO-7f-hXD"/>
+                <outlet property="warningTextView" destination="vg0-1X-5hw" id="Iq9-fW-ui1"/>
+            </connections>
+            <point key="canvasLocation" x="501" y="352"/>
+        </tableViewCell>
+    </objects>
+</document>
