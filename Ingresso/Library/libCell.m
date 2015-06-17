@@ -11,7 +11,6 @@
 @implementation libCell
 
 - (void)awakeFromNib {
-    // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -20,4 +19,19 @@
     // Configure the view for the selected state
 }
 
+-(IBAction)renewSelected:(id)sender
+{
+    if (self.renewButton.selected == NO) {
+        self.renewButton.selected = YES;
+        UIImage *selected = [UIImage imageNamed:@"checkmarkRed"];
+        [self.renewButton setBackgroundImage:selected forState:UIControlStateSelected];
+
+
+        
+    }
+    else {
+        self.renewButton.selected = NO;
+    }
+
+}
 @end

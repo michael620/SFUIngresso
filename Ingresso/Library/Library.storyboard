@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Web-po-qC2">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Web-po-qC2">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
@@ -48,11 +48,14 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="signIn:" destination="Web-po-qC2" eventType="touchUpInside" id="u3V-NQ-lvV"/>
+                                                </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount Owing : $0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oft-fS-BdJ">
-                                                <rect key="frame" x="0.0" y="62" width="337" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Amount Due :  $0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oft-fS-BdJ">
+                                                <rect key="frame" x="0.0" y="62" width="337" height="20.5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -80,33 +83,24 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="337" height="48"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lgd-rf-3yb">
-                                                        <rect key="frame" x="67" y="0.0" width="270" height="48"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="337" height="48"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YLL-hY-aod">
-                                                        <rect key="frame" x="0.0" y="1" width="34" height="48"/>
-                                                        <state key="normal" title="Button">
-                                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                        </state>
-                                                    </button>
                                                 </subviews>
                                                 <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="lgd-rf-3yb" firstAttribute="trailing" secondItem="u5h-gK-1JR" secondAttribute="trailing" id="0Ja-4y-6xQ"/>
-                                                    <constraint firstItem="YLL-hY-aod" firstAttribute="width" secondItem="u5h-gK-1JR" secondAttribute="width" multiplier="0.1" id="2wR-kC-0Vx"/>
-                                                    <constraint firstAttribute="centerY" secondItem="YLL-hY-aod" secondAttribute="centerY" constant="-1" id="cNK-Pn-LRi"/>
                                                     <constraint firstAttribute="height" secondItem="lgd-rf-3yb" secondAttribute="height" id="hs8-Xn-Wec"/>
-                                                    <constraint firstItem="YLL-hY-aod" firstAttribute="leading" secondItem="u5h-gK-1JR" secondAttribute="leading" id="ngS-za-MLY"/>
-                                                    <constraint firstItem="lgd-rf-3yb" firstAttribute="width" secondItem="u5h-gK-1JR" secondAttribute="width" multiplier="0.8" id="pta-40-M0S"/>
+                                                    <constraint firstItem="lgd-rf-3yb" firstAttribute="width" secondItem="u5h-gK-1JR" secondAttribute="width" id="pta-40-M0S"/>
                                                     <constraint firstAttribute="centerY" secondItem="lgd-rf-3yb" secondAttribute="centerY" id="tHp-Eb-F3N"/>
-                                                    <constraint firstItem="YLL-hY-aod" firstAttribute="height" secondItem="u5h-gK-1JR" secondAttribute="height" id="xAH-lg-dM7"/>
                                                 </constraints>
                                             </view>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bsR-GG-TUU">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="bsR-GG-TUU">
                                                 <rect key="frame" x="0.0" y="48" width="337" height="362"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <prototypes>
                                                     <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="LibraryCell" id="Pc4-nq-n7D">
                                                         <autoresizingMask key="autoresizingMask"/>
@@ -149,14 +143,18 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pNN-32-Jtr">
                                         <rect key="frame" x="19" y="543" width="337" height="48"/>
                                         <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <state key="normal" title="Button">
+                                        <state key="normal" title="Renew">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="renewSelected:" destination="Web-po-qC2" eventType="touchUpInside" id="cCF-gB-Lyq"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="Bsm-e4-E99" firstAttribute="height" secondItem="u5h-gK-1JR" secondAttribute="height" id="06i-5Q-kya"/>
                                     <constraint firstAttribute="centerX" secondItem="pNN-32-Jtr" secondAttribute="centerX" id="1b6-yl-C0n"/>
                                     <constraint firstItem="5py-OD-fKi" firstAttribute="top" secondItem="YvS-Dg-fq9" secondAttribute="top" multiplier="0.6" id="2lZ-f4-wSP"/>
                                     <constraint firstItem="pNN-32-Jtr" firstAttribute="height" secondItem="YvS-Dg-fq9" secondAttribute="height" multiplier="0.08" id="4VN-PB-Y5E"/>
@@ -199,13 +197,14 @@
                                         <exclude reference="l6u-X1-GvT"/>
                                         <exclude reference="lSf-s0-6C9"/>
                                         <exclude reference="xon-Dy-vyv"/>
+                                        <exclude reference="BXW-Ua-QWt"/>
                                         <exclude reference="9rl-bF-tEh"/>
                                         <exclude reference="nzM-GS-E3L"/>
                                     </mask>
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.7843137255" green="0.15686274510000001" blue="0.27450980390000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="AOJ-qW-6yS" firstAttribute="leading" secondItem="Yif-KN-tYA" secondAttribute="leading" id="DSF-iY-5bh"/>
                             <constraint firstItem="YvS-Dg-fq9" firstAttribute="leading" secondItem="Yif-KN-tYA" secondAttribute="leading" id="H84-bX-JSj"/>
@@ -218,11 +217,11 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="amountDueLabel" destination="Oft-fS-BdJ" id="9KP-Do-Vrw"/>
                         <outlet property="checkedOutLabel" destination="lgd-rf-3yb" id="pD4-9J-n8C"/>
                         <outlet property="libTable" destination="bsR-GG-TUU" id="ibe-pY-m4c"/>
-                        <outlet property="owingLabel" destination="Oft-fS-BdJ" id="rag-hg-EAc"/>
                         <outlet property="renewButton" destination="pNN-32-Jtr" id="y4a-Wg-CTG"/>
-                        <outlet property="selectAll" destination="YLL-hY-aod" id="OnN-be-fsT"/>
+                        <outlet property="signInButton" destination="Bsm-e4-E99" id="Qiv-m7-bXE"/>
                         <outlet property="userButton" destination="Bsm-e4-E99" id="KEW-Yr-eDn"/>
                     </connections>
                 </viewController>

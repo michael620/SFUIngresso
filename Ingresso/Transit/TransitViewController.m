@@ -24,6 +24,7 @@
 
 @implementation TransitViewController {
     bool edit;
+    bool wait;
 }
 @synthesize managedObjectContext;
 NSIndexPath *currentSelectedIndexPath;
@@ -31,7 +32,7 @@ NSIndexPath *currentSelectedIndexPath;
     [super viewDidLoad];
 
     
-    
+    wait = false;
     //Cosmetics
     self.busTable.layer.cornerRadius = 2;
     self.busTable.layer.masksToBounds = YES;
@@ -238,8 +239,8 @@ NSIndexPath *currentSelectedIndexPath;
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         cell.textLabel.text = @"No bus times.";
         */
-        busStop.expanded = true;
-        static NSString *CellIdentifier = @"BusTimeCell2";
+        busStop.expanded = false;
+        static NSString *CellIdentifier = @"BusTimeCellE";
         BusTimeCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             
@@ -265,7 +266,6 @@ NSIndexPath *currentSelectedIndexPath;
             cell = [nib objectAtIndex:0];
             
         }
-
 
         cell.nameLabel.text = busStop.name;
         cell.table.delegate   = cell;
@@ -317,7 +317,8 @@ NSIndexPath *currentSelectedIndexPath;
         
     }
     */
-    
+    if (!wait)
+    {
         [[self.busStops objectAtIndex:indexPath.row] setExpanded:![[self.busStops objectAtIndex:indexPath.row] expanded]];
         
         
@@ -334,7 +335,7 @@ NSIndexPath *currentSelectedIndexPath;
         
         NSArray *rows = [[NSArray alloc] initWithObjects:indexPath, nil];
         [self.busTable reloadRowsAtIndexPaths:rows withRowAnimation:NO];
-        
+    }
     
 }
 
@@ -365,6 +366,7 @@ NSIndexPath *currentSelectedIndexPath;
     /* ensure the connection was created */
     if (self.connection)
     {
+        wait = true;
         /* initialize the buffer */
         self.buffer = [NSMutableData data];
         
@@ -373,6 +375,7 @@ NSIndexPath *currentSelectedIndexPath;
     }
     else
     {
+        wait = false;
         NSLog(@"Connection Error BusTimes");
     }
 }
@@ -464,10 +467,13 @@ NSIndexPath *currentSelectedIndexPath;
     NSLog(@"Connection failed! Error - %@ %@",
           [error localizedDescription],
           [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+    wait = false;
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    wait = false;
+
     
     // ((DataURLConnection *)connection).onComplete();
     
@@ -501,7 +507,6 @@ NSIndexPath *currentSelectedIndexPath;
         });
         
     });
-    
     
 }
 

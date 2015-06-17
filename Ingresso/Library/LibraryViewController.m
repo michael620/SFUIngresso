@@ -16,6 +16,8 @@
     NSString * action;
     NSInteger numberCheckedOut;
     NSMutableArray * libraryitems;
+    NSString * name;
+    NSString * amountDue;
 }
 @property (strong, nonatomic) LibraryManager * libManager;
 @end
@@ -40,22 +42,97 @@
     dispatch_sync(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         libraryitems = libManager.libraryitems;
+        name = libManager.name;
+        amountDue = libManager.amountDue;
         [libTable reloadData];
         
         self.checkedOutLabel.text = [@([libraryitems count]) stringValue];
-        self.checkedOutLabel.text  =  [self.checkedOutLabel.text stringByAppendingString:@" ITEMS CHECKED OUT"];
+        self.checkedOutLabel.text  =  [self.checkedOutLabel.text stringByAppendingString:@" Items Checked Out"];
+        self.checkedOutLabel.textAlignment = NSTextAlignmentCenter;
+        
+
+        
+        if (libManager.signedIn)
+        {
+            [self.signInButton setTitle:(@"%@",libManager.name) forState:(UIControlStateNormal)];
+            self.amountDueLabel.text = [@"Amount Due : " stringByAppendingString:(@"%@",amountDue)];
+
+        }
+
     });
+}
+
+
+//Sign In button
+- (IBAction)signIn:(id)sender {
+    if (libManager.signedIn == false)
+    {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Sign In"
+                                                          message:@"Enter your last/family name and library barcode found on your SFU ID"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"Cancel"
+                                                otherButtonTitles:nil];
+        message.delegate = self;
+        [message setAlertViewStyle:UIAlertViewStyleLoginAndPasswordInput];
+        [[message textFieldAtIndex:1] setSecureTextEntry:NO];
+        [message textFieldAtIndex:0].placeholder = @"Last/Family Name";
+        [message textFieldAtIndex:1].placeholder = @"Library Card Barcode; eg 29345...";
+        [message addButtonWithTitle:@"Sign In"];
+        
+        [message show];
+    }
+    else
+    {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Sign Out"
+                                                          message:@"Would you like to sign out?"
+                                                         delegate:nil
+                                                cancelButtonTitle:@"Cancel"
+                                                otherButtonTitles:nil];
+        message.delegate = self;
+        [message addButtonWithTitle:@"Sign Out"];
+        
+        [message show];
+    }
+}
+
+-(void) alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ( [[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Sign In"] )
+    {
+        libManager.login = [alertView textFieldAtIndex:0].text;
+        libManager.password = [alertView textFieldAtIndex:1].text;
+        [libManager signIn];
+    
+    }
+    if ( [[alertView buttonTitleAtIndex:buttonIndex] isEqualToString:@"Sign Out"] )
+    {
+        libManager.login = @"";
+        libManager.password = @"";
+        [libManager signOut];
+        [self reloadTable];
+        [self.signInButton setTitle:@"Sign In" forState: UIControlStateNormal];
+        self.amountDueLabel.text = @"Amount Due : $0.00";
+
+    }
+    
 }
 
 - (void)reloadTable {
     
     libraryitems = libManager.libraryitems;
-    
+    amountDue = libManager.amountDue;
     [libTable reloadData];
     
     self.checkedOutLabel.text = [@([libraryitems count]) stringValue];
-    self.checkedOutLabel.text  =  [self.checkedOutLabel.text stringByAppendingString:@" ITEMS CHECKED OUT"];
+    self.checkedOutLabel.text  =  [self.checkedOutLabel.text stringByAppendingString:@" Items Checked Out"];
+    self.checkedOutLabel.textAlignment = NSTextAlignmentCenter;
     
+    if (libManager.signedIn)
+    {
+        [self.signInButton setTitle:(@"%@",libManager.name) forState:(UIControlStateNormal)];
+        self.amountDueLabel.text = [@"Amount Due : " stringByAppendingString:(@"%@",amountDue)];
+
+    }
 }
 
 
@@ -65,7 +142,7 @@
     [libManager renewSelected:libTable];
     
 }
-
+/*
 -(void) webViewDidFinishLoad:(UIWebView *)webView {
     
     NSString *url = [web stringByEvaluatingJavaScriptFromString:@"window.location.href"];
@@ -76,8 +153,8 @@
     
     if ([url  isEqual: @"https://troy.lib.sfu.ca/patroninfo"])
     {
-        NSString *savedUsername = @"Parker";
-        NSString *savedPassword = @"29345005914243";
+        NSString *savedUsername = @"Cheng";
+        NSString *savedPassword = @"29345006524181";
         NSString *loadUsernameJS = [NSString stringWithFormat:@"var inputFields = document.querySelectorAll(\"input[name='name']\"); \
                                     for (var i = inputFields.length >>> 0; i--;) { inputFields[i].value = '%@';}", savedUsername];
         NSString *loadPasswordJS = [NSString stringWithFormat:@"var inputFields = document.querySelectorAll(\"input[name='code']\"); \
@@ -92,7 +169,7 @@
         
     }
     
-    
+    //Sucessfully signed in, go to items checked out
     else if ([place  isEqual: @"top"])
     {
         userID = [urlsplit objectAtIndex:4];
@@ -103,7 +180,6 @@
         NSURLRequest *request = [NSURLRequest requestWithURL:myURL];
         
         [web loadRequest:request];
-        
     }
     
     else if ([action  isEqual: @"RENEWALL"])
@@ -158,6 +234,7 @@
         [libTable reloadData];
     }
     
+    //Go to items, load data into view controller table
     else if ([action  isEqual: @"NONE"] && [place  isEqual: @"items"])
     {
         libraryitems = [[NSMutableArray alloc] init];
@@ -196,7 +273,7 @@
     }
     
 }
-
+*/
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if ([cell respondsToSelector:@selector(setSeparatorInset:)]) {
@@ -223,6 +300,23 @@
 
 -(UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*
+    static NSString *tablecell = @"table";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:tablecell];
+    
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:tablecell];
+    }
+    
+    cell.textLabel.text = [libraryitems[indexPath.row] objectForKey:@"bookName"];
+    cell.textLabel.numberOfLines = 0;
+    cell.detailTextLabel.text = [libraryitems[indexPath.row] objectForKey:@"dueDate"];
+
+    
+    return cell;
+     */
+    
     static NSString *simpleTableIdentifier = @"libCell";
     
     libCell *cell = (libCell *)[tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -236,20 +330,25 @@
     cell.dueDateTextView.text = [libraryitems[indexPath.row] objectForKey:@"dueDate"];
     cell.dueDateTextView.text = [cell.dueDateTextView.text stringByAppendingString:[libraryitems[indexPath.row] objectForKey:@"renewCount"]];
     cell.warningTextView.text = [libraryitems[indexPath.row] objectForKey:@"warning"];
-    
+
     [cell.bookName setFont:[UIFont systemFontOfSize:18.0f]];
-    cell.bookName.backgroundColor = [UIColor colorWithRed:(150/255.0) green:(150/255.0) blue:(150/255.0) alpha:1];
-    cell.warningTextView.backgroundColor = [UIColor colorWithRed:(100/255.0) green:(100/255.0) blue:(100/255.0) alpha:1];
-    cell.dueDateTextView.backgroundColor = [UIColor colorWithRed:(100/255.0) green:(100/255.0) blue:(100/255.0) alpha:1];
+    //cell.bookName.backgroundColor = [UIColor colorWithRed:(150/255.0) green:(150/255.0) blue:(150/255.0) alpha:1];
+    //cell.warningTextView.backgroundColor = [UIColor colorWithRed:(100/255.0) green:(100/255.0) blue:(100/255.0) alpha:1];
+    //cell.dueDateTextView.backgroundColor = [UIColor colorWithRed:(100/255.0) green:(100/255.0) blue:(100/255.0) alpha:1];
     cell.warningTextView.textColor = [UIColor colorWithRed:(255/255.0) green:(0/255.0) blue:(20/255.0) alpha:1];
-    [cell.warningTextView setFont:[UIFont systemFontOfSize:20.0f]];
-    [cell.dueDateTextView setFont:[UIFont systemFontOfSize:18.0f]];
+    [cell.warningTextView setFont:[UIFont systemFontOfSize:12.0f]];
+    [cell.dueDateTextView setFont:[UIFont systemFontOfSize:12.0f]];
+    cell.dueDateTextView.textAlignment = NSTextAlignmentRight;
+    //cell.bookName.textAlignment = NSTextAlignmentJustified;
+
+    
+    
     return cell;
 }
 
 -(CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 220;
+    return 180;
 }
 
 

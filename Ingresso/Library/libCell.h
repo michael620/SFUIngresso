@@ -12,6 +12,8 @@
 @property (weak, nonatomic) IBOutlet UITextView *bookName;
 @property (weak, nonatomic) IBOutlet UITextView *warningTextView;
 @property (weak, nonatomic) IBOutlet UITextView *dueDateTextView;
-
+@property (weak, nonatomic) IBOutlet UIButton *renewButton;
 @property (weak, nonatomic) IBOutlet UISwitch *pick;
+
+
 @end

@@ -13,10 +13,19 @@
 
 @property (strong,nonatomic) UIWebView * web;
 @property (strong,nonatomic) NSMutableArray * libraryitems;
+@property (strong,nonatomic) NSString * name;
+@property (strong, nonatomic) NSString * login; //Family name
+@property (strong, nonatomic) NSString * password; //Library barcode
+@property (strong, nonatomic) NSString * action;
+
+@property (strong, nonatomic) NSString * amountDue;
 @property NSInteger numberCheckedOut;
+
+@property BOOL signedIn, failedsignIn;
 
 + (id) sharedManager;
 - (void) restart;
 - (void) renewSelected:(UITableView *)table;
-
+- (void) signIn;
+- (void) signOut;
 @end

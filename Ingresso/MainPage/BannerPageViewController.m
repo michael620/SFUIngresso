@@ -27,6 +27,7 @@
 @implementation BannerPageViewController
 {
     int currentIndex;
+    bool loaded;
 }
 @synthesize settings;
 
@@ -36,8 +37,10 @@
     settings = [[NSMutableDictionary alloc] init];
     [settings setValue:@YES forKey:@"RSS"];
     
-    CGRect frame = [self.view frame];
     
+    //CGRect frame = [self.view frame];
+    
+    /*
     UIImageView *rightArrow =[[UIImageView alloc] initWithFrame:CGRectMake(frame.size.width - 25,160,20,100)];
     //rightArrow.image=[UIImage imageNamed:@"rightarrow"];
     rightArrow.layer.zPosition = MAXFLOAT;
@@ -49,6 +52,7 @@
     leftArrow.layer.zPosition = MAXFLOAT;
     leftArrow.hidden = YES;
     [self.view addSubview:leftArrow];
+    */
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateSettings:) name:@"updateSettings" object:nil];
     // Do any additional setup after loading the view.
@@ -57,66 +61,74 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:YES];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        
-        _pages = [[NSMutableArray alloc] init];
-        
-        _imgs = [[NSMutableArray alloc] init];
-        _headlines = [[NSMutableArray alloc] init];
-        _links = [[NSMutableArray alloc] init];
-        
-        
-        if ([[settings objectForKey:@"RSS"]  isEqual: @YES])
-        {
-            self.rss = [RSSManager sharedManager];
-            if ([[self.rss allfeeds] count] >= 3)
-                [self.rss loadFirstThreeImages];
-        }
-        
-        dispatch_sync(dispatch_get_main_queue(), ^{
-        for (int i = 0;i<3;i++)
-        {
+    if(!loaded)
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            
+            _pages = [[NSMutableArray alloc] init];
+            
+            _imgs = [[NSMutableArray alloc] init];
+            _headlines = [[NSMutableArray alloc] init];
+            _links = [[NSMutableArray alloc] init];
+            
             
             if ([[settings objectForKey:@"RSS"]  isEqual: @YES])
-                
             {
-                if ([[self.rss allfeeds] count] >= 3) {
-                    MainPageRssViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainPageRssViewController"];
-                    pageContentViewController.img = [[self.rss.allfeeds objectAtIndex:i] objectForKey:@"img"];
-                    pageContentViewController.link = [[self.rss.allfeeds objectAtIndex:i] objectForKey:@"link"];
-                    pageContentViewController.headline = [[self.rss.allfeeds objectAtIndex:i] objectForKey:@"title"];
-                    pageContentViewController.bannerType = @"RSS";
-                    
-                    [self.pages addObject:pageContentViewController];
-                }
-                
+                self.rss = [RSSManager sharedManager];
+                if ([[self.rss allfeeds] count] >= 3)
+                    [self.rss loadFirstThreeImages];
             }
-        }
-        // Create page view controller
-        self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
-        // self.pageViewController = [[UIPageViewController alloc] init];
-        self.pageViewController.delegate = self;
-        self.pageViewController.dataSource = self;
-        self.pageViewController.view.backgroundColor = [UIColor colorWithRed:(25/255.0) green:(25/255.0) blue:(25/255.0) alpha:1.0];
-        
-        currentIndex = 0;
-        BannerDetailViewController *startingViewController = [self viewControllerAtIndex:0];
-        NSArray *viewControllers;
-        if(startingViewController)
-            viewControllers = @[startingViewController];
-        else
-            viewControllers = @[[self.storyboard instantiateViewControllerWithIdentifier:@"NoInternet"]];
-        
-        [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-        [self addChildViewController:_pageViewController];
-        self.pageViewController.view.frame = self.view.frame;
-        [self.view addSubview:_pageViewController.view];
-        [self.pageViewController didMoveToParentViewController:self];
+            
+            dispatch_sync(dispatch_get_main_queue(), ^{
+            for (int i = 0;i<3;i++)
+            {
+                
+                if ([[settings objectForKey:@"RSS"]  isEqual: @YES])
+                    
+                {
+                    if ([[self.rss allfeeds] count] >= 3) {
+                        MainPageRssViewController *pageContentViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"MainPageRssViewController"];
+                        pageContentViewController.img = [[self.rss.allfeeds objectAtIndex:i] objectForKey:@"img"];
+                        pageContentViewController.link = [[self.rss.allfeeds objectAtIndex:i] objectForKey:@"link"];
+                        pageContentViewController.headline = [[self.rss.allfeeds objectAtIndex:i] objectForKey:@"title"];
+                        pageContentViewController.bannerType = @"RSS";
+                        
+                        [self.pages addObject:pageContentViewController];
+                    }
+                    
+                }
+            }
+            // Create page view controller
+            self.pageViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"PageViewController"];
+            // self.pageViewController = [[UIPageViewController alloc] init];
+            self.pageViewController.delegate = self;
+            self.pageViewController.dataSource = self;
+            self.pageViewController.view.backgroundColor = [UIColor colorWithRed:(25/255.0) green:(25/255.0) blue:(25/255.0) alpha:1.0];
+            
+            currentIndex = 0;
+            BannerDetailViewController *startingViewController = [self viewControllerAtIndex:0];
+            
+            //TODO
+            NSArray *viewControllers;
+            if(startingViewController)
+                viewControllers = @[startingViewController];
+            else
+                viewControllers = @[[self.storyboard instantiateViewControllerWithIdentifier:@"NoInternet"]];
+            
+            [self.pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
+            [self addChildViewController:_pageViewController];
+            self.pageViewController.view.frame = self.view.frame;
+            [self.view addSubview:_pageViewController.view];
+                
+            [self.pageViewController didMoveToParentViewController:self];
+            });
+            
         });
-        
-    });
-    
+        loaded = true;
+    }
 }
+
+
 
 -(void) pageViewController:(UIPageViewController *)pageViewController willTransitionToViewControllers:(NSArray *)pendingViewControllers
 {

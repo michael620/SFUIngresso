@@ -11,16 +11,18 @@
 
 @interface LibraryManager () <UIWebViewDelegate> {
     NSString * userID;
-    NSString * action;
-    int numLate,numSoonLate;
     
+    //NSString * action;
+    int numLate,numSoonLate;
+    BOOL attempt;
+    BOOL finished;
 }
 
 @end
 
 
 @implementation LibraryManager
-@synthesize web,libraryitems,numberCheckedOut;
+@synthesize web,libraryitems,numberCheckedOut,action;
 
 + (id) sharedManager {
     static LibraryManager *sharedManager = nil;
@@ -28,7 +30,6 @@
     dispatch_once(&onceToken, ^{
         sharedManager = [[self alloc] init];
     });
-    
     return sharedManager;
 }
 
@@ -60,7 +61,7 @@
         
         libCell * cell = (libCell * )[table cellForRowAtIndexPath:path];
         
-        if(cell.pick.on)
+        if(cell.renewButton.selected)
         {
             NSString *performSubmitJS = [NSString stringWithFormat:@"var radio = document.querySelectorAll(\"input[name='renew%d']\"); \
                                          radio[0].click()",i];
@@ -79,16 +80,19 @@
     
     numLate = 0;
     numSoonLate = 0;
+    attempt = false;
     action = @"NONE";
     self.web = [[UIWebView alloc] init];
     web.delegate = self;
-    
+    self.signedIn = false;
+    self.failedsignIn = false;
+    finished = false;
     NSString * url = @"https://troy.lib.sfu.ca/patroninfo";
     NSURL *myURL = [NSURL URLWithString: [url stringByAddingPercentEscapesUsingEncoding:
                                           NSUTF8StringEncoding]];
     NSURLRequest *request = [NSURLRequest requestWithURL:myURL];
     [self.web loadRequest:request];
-    
+
     
     return self;
 }
@@ -106,11 +110,27 @@
     [self.web loadRequest:request];
 }
 
+- (void)signIn
+{
+    attempt = false;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLibTable" object:nil userInfo:nil];
+    [self restart];
+    
+}
+- (void)signOut
+{
+    attempt = false;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLibTable" object:nil userInfo:nil];
+    [libraryitems removeAllObjects];
+    self.amountDue = @"$0.00";
+    [self restart];
+}
+
+
 -(void) webViewDidFinishLoad:(UIWebView *)webView {
     
     NSDate *today = [NSDate date];
     NSDateFormatter *df= [[NSDateFormatter alloc] init];
-    
     
     NSString *url = [web stringByEvaluatingJavaScriptFromString:@"window.location.href"];
     NSArray *  urlsplit = [url componentsSeparatedByString:@"/"];
@@ -120,32 +140,54 @@
     
     if ([url  isEqual: @"https://troy.lib.sfu.ca/patroninfo"])
     {
-        NSString *savedUsername = @"Parker";
-        NSString *savedPassword = @"29345005914243";
-        NSString *loadUsernameJS = [NSString stringWithFormat:@"var inputFields = document.querySelectorAll(\"input[name='name']\"); \
-                                    for (var i = inputFields.length >>> 0; i--;) { inputFields[i].value = '%@';}", savedUsername];
-        NSString *loadPasswordJS = [NSString stringWithFormat:@"var inputFields = document.querySelectorAll(\"input[name='code']\"); \
-                                    for (var i = inputFields.length >>> 0; i--;) { inputFields[i].value = '%@';}", savedPassword];
+        self.signedIn = NO;
+        if (attempt == false)
+        {
+            NSString *loadUsernameJS = [NSString stringWithFormat:@"var inputFields = document.querySelectorAll(\"input[name='name']\"); \
+                                        for (var i = inputFields.length >>> 0; i--;) { inputFields[i].value = '%@';}", _login];
+            NSString *loadPasswordJS = [NSString stringWithFormat:@"var inputFields = document.querySelectorAll(\"input[name='code']\"); \
+                                        for (var i = inputFields.length >>> 0; i--;) { inputFields[i].value = '%@';}", _password];
         
-        [web stringByEvaluatingJavaScriptFromString: loadUsernameJS];
-        [web stringByEvaluatingJavaScriptFromString: loadPasswordJS];
+            [web stringByEvaluatingJavaScriptFromString: loadUsernameJS];
+            [web stringByEvaluatingJavaScriptFromString: loadPasswordJS];
         
-        NSString *performSubmitJS = @"var passFields = document.querySelectorAll(\"input[name='submit']\"); \
-        passFields[0].click()";
-        [web stringByEvaluatingJavaScriptFromString:performSubmitJS];
-        
+            NSString *performSubmitJS = @"var passFields = document.querySelectorAll(\"input[name='submit']\"); \
+            passFields[0].click()";
+            [web stringByEvaluatingJavaScriptFromString:performSubmitJS];
+            attempt = true;
+        }
     }
     
     
+    
+    //Logged in successfully, get user full name, go to items checked out page
     else if ([place  isEqual: @"top"])
     {
+        self.failedsignIn = false;
+        NSString * performSubmitJS = @"document.getElementById(\"patroninfo\").innerHTML";
+        NSString * str = [web stringByEvaluatingJavaScriptFromString:performSubmitJS];
+        str = [web stringByEvaluatingJavaScriptFromString:performSubmitJS];
+        
+        str = [[str componentsSeparatedByString:@"<br>"] objectAtIndex:1];
+        str = [str substringFromIndex:1];
+        
+        self.name = str;
+        
+        performSubmitJS = @"document.getElementsByClassName(\"pageMainArea\")[0].getElementsByTagName(\"a\")[3].innerHTML";
+        str = [web stringByEvaluatingJavaScriptFromString:performSubmitJS];
+        str = [[str componentsSeparatedByString:@" "] objectAtIndex:0];
+        str = [str substringFromIndex:0];
+        
+        self.amountDue = str;
+        
+        action = @"NONE";
         userID = [urlsplit objectAtIndex:4];
         url = [NSString stringWithFormat:@"https://troy.lib.sfu.ca/patroninfo~S1/%@/items",userID];
         
         NSURL *myURL = [NSURL URLWithString: [url stringByAddingPercentEscapesUsingEncoding:
                                               NSUTF8StringEncoding]];
         NSURLRequest *request = [NSURLRequest requestWithURL:myURL];
-        
+        self.signedIn = true;
         [web loadRequest:request];
         
     }
@@ -170,7 +212,6 @@
         NSString * str = [web stringByEvaluatingJavaScriptFromString:performSubmitJS];
         numberCheckedOut = [str integerValue] - 2;
         
-        str = [web stringByEvaluatingJavaScriptFromString:performSubmitJS];
         
         for (int i = 0; i < numberCheckedOut; i++)
         {
@@ -245,6 +286,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLibTable" object:nil userInfo:nil];
     }
     
+    //At items checked out
     else if ([action  isEqual: @"NONE"] && [place  isEqual: @"items"])
     {
         
@@ -253,11 +295,11 @@
         
         libraryitems = [[NSMutableArray alloc] init];
         
+        
+        
         NSString * performSubmitJS = @"document.getElementsByClassName(\"patFunc\")[0].tBodies[0].rows.length";
         NSString * str = [web stringByEvaluatingJavaScriptFromString:performSubmitJS];
         numberCheckedOut = [str integerValue] - 2;
-        
-        str = [web stringByEvaluatingJavaScriptFromString:performSubmitJS];
         
         for (int i = 0; i < numberCheckedOut; i++)
         {
@@ -329,6 +371,8 @@
         
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadLibTable" object:nil userInfo:nil];
+        
+        finished = true;
     }
     
 }
